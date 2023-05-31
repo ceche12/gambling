@@ -1,6 +1,6 @@
 package gambling.gambling;
 
-/**
+/*
  * Hello world!
  *
  */
@@ -12,5 +12,6 @@ public class App
         System.out.println("pruebas");
         System.out.println("100%");
         System.out.println("desde github");
+        System.out.println("prueba");
     }
 }
