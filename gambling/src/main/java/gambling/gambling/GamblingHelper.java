@@ -5,7 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class GamblingHelper {
@@ -41,6 +45,24 @@ public class GamblingHelper {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public List<Apuesta> seleccionar(Connection conexion) {
+		List<Apuesta> apuestas=new ArrayList<>();
+		String sql="select * from apuesta where tipo='LOTERIA'";
+		PreparedStatement ps=null;
+		ResultSet resultado=null;
+		try {
+			ps=conexion.prepareStatement(sql);
+			resultado=ps.executeQuery();
+			while(resultado.next()) {
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return apuestas;
 	}
 	
 	
