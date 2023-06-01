@@ -25,7 +25,6 @@ public class Sorteo {
 
 	public Sorteo(String fechaApertura, String fechaCierre, String fechaHoraCelebracion, String resultado, String tipo,
 			List<Apuesta> apuestas) {
-		this.id = id;
 		this.fechaApertura = fechaApertura;
 		this.fechaCierre = fechaCierre;
 		this.fechaHoraCelebracion = fechaHoraCelebracion;

@@ -5,9 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class App {
@@ -16,6 +19,7 @@ public class App {
 	 * 
 	 * @param apuestas
 	 */
+	// deberia convertir un sorteo 
 	public void convertirToJson(List<Apuesta> apuestas) {
 		File f = new File("apuestas.json");
 		try {
@@ -23,12 +27,8 @@ public class App {
 			PrintWriter printWriter = new PrintWriter(new FileWriter(f));
 			ObjectMapper om = new ObjectMapper();
 			om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-			// String json2write = om.writeValueAsString(json2write);
-			// String json3write = om.writeValueAsString();
-			printWriter.print("[");
-			// printWriter.print(json2write + ",");
-			// printWriter.print(json3write);
-			printWriter.print("]");
+			String json2write = om.writeValueAsString(apuestas);
+			printWriter.print(json2write);
 			printWriter.flush();
 			printWriter.close();
 		} catch (IOException ex) {
@@ -40,19 +40,42 @@ public class App {
 	 *
 	 * @param fichero
 	 */
-	public void jsonToObjeto(String fichero) {
+	public List<Apuesta> jsonToLista(String fichero) {
 
+		List<Apuesta> apuestas = new ArrayList();
+		try {
+			apuestas = (List<Apuesta>) new ObjectMapper().readValue(fichero, new TypeReference<List<Apuesta>>() {
+			});
+
+		} catch (IOException ex) {
+			System.out.println("Error: " + ex.getLocalizedMessage());
+		}
+//		if (apuestas != null) {
+//			System.out.println(apuestas);
+//		}
+
+		return apuestas;
+	}
+
+	public void InsertarLista(Connection conex, List<Apuesta> apuestas) throws SQLException {
+		GamblingHelper gambling = new GamblingHelper();
+		for (Apuesta apuesta : apuestas) {
+			gambling.insertarApuesta(conex, apuesta);
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
 		GamblingHelper gambling = new GamblingHelper();
-		Connection conex = gambling.crearConexion();
+		App app = new App();
+		// Connection conex = gambling.crearConexion();
 
 		Sorteo sorteo = new Sorteo(1, "2020-01-01", "2020-01-02", "2023-06-01 12:34:56", "prueb", "PRIMITIVA", null);
 		Jugador jugador = new Jugador("jugador1@example.com", "1234", "123Y", "123999", 45);
-
-		gambling.insertarApuesta(conex, new Primitva("2020-01-01", "10 20 30", 10, 5, sorteo, jugador, 7, 33));
-
-		gambling.cerrarConexion(conex);
+		Primitiva prim = new Primitiva("2020-01-01", "10 20 30", 10, 5, sorteo, jugador, 7, 33);
+		// gambling.insertarApuesta(conex, prim);
+		List<Apuesta> apuestas = new ArrayList();
+		apuestas.add(prim);
+		app.convertirToJson(apuestas);
+		// gambling.cerrarConexion(conex);
 	}
 }

@@ -1,0 +1,18 @@
+[
+    {
+        "id": 0,
+        "fechaApuesta": "2020-01-01",
+        "combinacion": "10 20 30",
+        "precio": 10.0,
+        "ganado": 5.0,
+        "complementario": 7,
+        "reintegro": 33,
+        "jugador": {
+            "correoElectronico": "jugador1@example.com",
+            "contrasena": "1234",
+            "dni": "123Y",
+            "telefono": "123999",
+            "dinero": 45.0
+        }
+    }
+]

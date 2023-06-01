@@ -1,5 +1,8 @@
 package gambling.gambling;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+@JsonPropertyOrder
 public abstract class Apuesta {
 	protected int id;
 	protected String fechaApuesta;
@@ -7,6 +10,8 @@ public abstract class Apuesta {
 //	protected String tipo;
 	protected double precio;
 	protected double ganado;
+	// se ignora el sorteo por que el sorteo ya contiene apuestas y seria redundante
+	@JsonIgnore
 	protected Sorteo sorteo;
 	protected Jugador jugador;
 
