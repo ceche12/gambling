@@ -111,6 +111,11 @@ public class GamblingHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
+		} finally {
+			if (resultado != null)
+				resultado.close();
+			if (sentencia != null)
+				sentencia.close();
 		}
 
 		return apuestas;
@@ -142,7 +147,7 @@ public class GamblingHelper {
 //		return sorteo;
 //	}
 
-	private Jugador jugadorPorMail(Connection conexion, String mail) {
+	private Jugador jugadorPorMail(Connection conexion, String mail) throws SQLException {
 		Jugador jugador = null;
 		String sql = "select * from jugador where correo_electronico=?";
 		PreparedStatement sentencia = null;
@@ -162,12 +167,19 @@ public class GamblingHelper {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (resultado != null)
+				resultado.close();
+			if (sentencia != null)
+				sentencia.close();
 		}
 
 		return jugador;
 	}
 
-	public List<Apuesta> seleccionarApuestas(Connection conexion, String tipo) {
+	public List<Apuesta> seleccionarApuestas(Connection conexion, String tipo) throws Exception {
 		List<Apuesta> apuestas = new ArrayList<>();
 		String sql = "select * from apuesta where tipo=?";
 		PreparedStatement sentencia = null;
@@ -229,6 +241,13 @@ public class GamblingHelper {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}finally {
+			if (resultado != null)
+				resultado.close();
+			if (sentencia != null)
+				sentencia.close();
 		}
 
 		return apuestas;
@@ -316,6 +335,11 @@ public class GamblingHelper {
 			conex.rollback();
 			e.printStackTrace();
 			throw e;
+		} finally {
+			if (genKeys != null)
+				genKeys.close();
+			if (sentencia != null)
+				sentencia.close();
 		}
 
 	}
