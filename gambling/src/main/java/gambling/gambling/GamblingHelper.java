@@ -46,33 +46,45 @@ public class GamblingHelper {
 		}
 
 	}
-	
+
 	public List<Apuesta> seleccionar(Connection conexion) {
-		List<Apuesta> apuestas=new ArrayList<>();
-		String sql="select * from apuesta where tipo='LOTERIA'";
-		PreparedStatement ps=null;
-		ResultSet resultado=null;
+		List<Apuesta> apuestas = new ArrayList<>();
+		String sql = "select * from apuesta where tipo='LOTERIA'";
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
 		try {
-			ps=conexion.prepareStatement(sql);
-			resultado=ps.executeQuery();
-			while(resultado.next()) {
-				
+			ps = conexion.prepareStatement(sql);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 		return apuestas;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// Carlos
+	public void insertarApuesta(Connection conex, Apuesta apuesta) {
+
+		if (apuesta instanceof Loteria) {
+			String sql = "Insert into apuesta (`id`,`fecha_apuesta`,`combinacion`,`tipo`,`precio`,"
+					+ "`ganado`,`reintegro`,`estrellas`,`num_clave`,`complementario`,`id_sorteo`,`correo_jugador`) VALUES(?,?,?,?,?,?,) ";
+		} else if (apuesta instanceof Gordo) {
+			String sql = "Insert into apuesta (`id`,`fecha_apuesta`,`combinacion`,`tipo`,`precio`,"
+					+ "`ganado`,`reintegro`,`estrellas`,`num_clave`,`complementario`,`id_sorteo`,`correo_jugador`) VALUES(?,?,?,?,?,?,) ";
+		} else if (apuesta instanceof Primitva) {
+			String sql = "Insert into apuesta (`id`,`fecha_apuesta`,`combinacion`,`tipo`,`precio`,"
+					+ "`ganado`,`reintegro`,`estrellas`,`num_clave`,`complementario`,`id_sorteo`,`correo_jugador`) VALUES(?,?,?,?,?,?,) ";
+		} else if (apuesta instanceof Sorteo) {
+			String sql = "Insert into apuesta (`id`,`fecha_apuesta`,`combinacion`,`tipo`,`precio`,"
+					+ "`ganado`,`reintegro`,`estrellas`,`num_clave`,`complementario`,`id_sorteo`,`correo_jugador`) VALUES(?,?,?,?,?,?,) ";
+		} else if (apuesta instanceof Quiniela) {
+			String sql = "Insert into apuesta (`id`,`fecha_apuesta`,`combinacion`,`tipo`,`precio`,"
+					+ "`ganado`,`reintegro`,`estrellas`,`num_clave`,`complementario`,`id_sorteo`,`correo_jugador`) VALUES(?,?,?,?,?,?,) ";
+		}
+
+	}
 
 }
