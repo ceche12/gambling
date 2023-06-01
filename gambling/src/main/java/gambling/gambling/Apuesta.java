@@ -6,12 +6,12 @@ public abstract class Apuesta {
 	private String combinacion;
 	private String tipo;
 	private double precio;
-	private double ganado;
+	private boolean ganado;
 	private Sorteo sorteo;
 	private Jugador jugador;
 
 	// Constructor
-	public Apuesta(int id, String fechaApuesta, String combinacion, String tipo, double precio, double ganado,
+	public Apuesta(int id, String fechaApuesta, String combinacion, String tipo, double precio, boolean ganado,
 			Sorteo sorteo, Jugador jugador) {
 		this.id = id;
 		this.fechaApuesta = fechaApuesta;
@@ -64,11 +64,11 @@ public abstract class Apuesta {
 		this.precio = precio;
 	}
 
-	public double getGanado() {
+	public boolean getGanado() {
 		return ganado;
 	}
 
-	public void setGanado(double ganado) {
+	public void setGanado(boolean ganado) {
 		this.ganado = ganado;
 	}
 
