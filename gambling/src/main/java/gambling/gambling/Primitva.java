@@ -5,9 +5,16 @@ public class Primitva extends Apuesta {
 	int complementario;
 	int reintegro;
 
-	public Primitva(int id, String fechaApuesta, String combinacion, String tipo, double precio, boolean ganado,
-			Sorteo sorteo, Jugador jugador, int complementario, int reintegro) {
-		super(id, fechaApuesta, combinacion, tipo, precio, ganado, sorteo, jugador);
+	public Primitva(int id, String fechaApuesta, String combinacion, double precio, double ganado, Sorteo sorteo,
+			Jugador jugador, int complementario, int reintegro) {
+		super(id, fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
+		this.complementario = complementario;
+		this.reintegro = reintegro;
+	}
+
+	public Primitva(String fechaApuesta, String combinacion, double precio, double ganado, Sorteo sorteo,
+			Jugador jugador, int complementario, int reintegro) {
+		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 		this.complementario = complementario;
 		this.reintegro = reintegro;
 	}

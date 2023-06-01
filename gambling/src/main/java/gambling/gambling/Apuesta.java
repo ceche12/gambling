@@ -4,19 +4,30 @@ public abstract class Apuesta {
 	protected int id;
 	protected String fechaApuesta;
 	protected String combinacion;
-	protected String tipo;
+//	protected String tipo;
 	protected double precio;
-	protected boolean ganado;
+	protected double ganado;
 	protected Sorteo sorteo;
 	protected Jugador jugador;
 
 	// Constructor
-	public Apuesta(int id, String fechaApuesta, String combinacion, String tipo, double precio, boolean ganado,
-			Sorteo sorteo, Jugador jugador) {
+	public Apuesta(int id, String fechaApuesta, String combinacion, double precio, double ganado, Sorteo sorteo,
+			Jugador jugador) {
 		this.id = id;
 		this.fechaApuesta = fechaApuesta;
 		this.combinacion = combinacion;
-		this.tipo = tipo;
+		// this.tipo = tipo;
+		this.precio = precio;
+		this.ganado = ganado;
+		this.sorteo = sorteo;
+		this.jugador = jugador;
+	}
+
+	public Apuesta(String fechaApuesta, String combinacion, double precio, double ganado, Sorteo sorteo,
+			Jugador jugador) {
+		this.fechaApuesta = fechaApuesta;
+		this.combinacion = combinacion;
+		// this.tipo = tipo;
 		this.precio = precio;
 		this.ganado = ganado;
 		this.sorteo = sorteo;
@@ -48,13 +59,13 @@ public abstract class Apuesta {
 		this.combinacion = combinacion;
 	}
 
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+//	public String getTipo() {
+//		return tipo;
+//	}
+//
+//	public void setTipo(String tipo) {
+//		this.tipo = tipo;
+//	}
 
 	public double getPrecio() {
 		return precio;
@@ -64,11 +75,11 @@ public abstract class Apuesta {
 		this.precio = precio;
 	}
 
-	public boolean getGanado() {
+	public double getGanado() {
 		return ganado;
 	}
 
-	public void setGanado(boolean ganado) {
+	public void setGanado(double ganado) {
 		this.ganado = ganado;
 	}
 

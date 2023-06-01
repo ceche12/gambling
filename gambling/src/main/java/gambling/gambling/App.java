@@ -11,20 +11,23 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class App {
-
-	public void convertirJson(List<Apuesta> apuestas) {
-
+	/**
+	 * escribir en un json una lista de apuestas
+	 * 
+	 * @param apuestas
+	 */
+	public void convertirToJson(List<Apuesta> apuestas) {
 		File f = new File("apuestas.json");
 		try {
 			// creación del flujo de salida
 			PrintWriter printWriter = new PrintWriter(new FileWriter(f));
 			ObjectMapper om = new ObjectMapper();
 			om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-			String json2write = om.writeValueAsString(json2write);
-			String json3write = om.writeValueAsString();
+			// String json2write = om.writeValueAsString(json2write);
+			// String json3write = om.writeValueAsString();
 			printWriter.print("[");
-			printWriter.print(json2write + ",");
-			printWriter.print(json3write);
+			// printWriter.print(json2write + ",");
+			// printWriter.print(json3write);
 			printWriter.print("]");
 			printWriter.flush();
 			printWriter.close();
@@ -33,10 +36,23 @@ public class App {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		GamblingHelper bbdd = new GamblingHelper();
-		Connection conex = bbdd.crearConexion();
-		bbdd.cerrarConexion(conex);
+	/**
+	 *
+	 * @param fichero
+	 */
+	public void jsonToObjeto(String fichero) {
 
+	}
+
+	public static void main(String[] args) throws Exception {
+		GamblingHelper gambling = new GamblingHelper();
+		Connection conex = gambling.crearConexion();
+
+		Sorteo sorteo = new Sorteo(1, "2020-01-01", "2020-01-02", "2023-06-01 12:34:56", "prueb", "PRIMITIVA", null);
+		Jugador jugador = new Jugador("jugador1@example.com", "1234", "123Y", "123999", 45);
+
+		gambling.insertarApuesta(conex, new Primitva("2020-01-01", "10 20 30", 10, 5, sorteo, jugador, 7, 33));
+
+		gambling.cerrarConexion(conex);
 	}
 }
