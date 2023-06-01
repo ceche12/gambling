@@ -1,18 +1,58 @@
 [
     {
-        "id": 0,
+        "id": 14,
         "fechaApuesta": "2020-01-01",
         "combinacion": "10 20 30",
         "precio": 10.0,
         "ganado": 5.0,
         "complementario": 7,
-        "reintegro": 33,
+        "reintegro": 33
+    },
+    {
+        "id": 15,
+        "fechaApuesta": "2020-01-01",
+        "combinacion": "10 20 30",
+        "precio": 10.0,
+        "ganado": 5.0
+    },
+    {
+        "id": 16,
+        "fechaApuesta": "2022-01-01",
+        "combinacion": "123456",
+        "precio": 10.0,
+        "ganado": 0.0,
+        "nClave": 7
+    },
+    {
+        "id": 17,
+        "fechaApuesta": "2023-06-01",
+        "combinacion": "10-15-20-25-30",
+        "precio": 2.0,
+        "ganado": 0.0,
+        "estrellas": "2-4"
+    },
+    {
+        "id": 18,
+        "fechaApuesta": "2023-05-15",
+        "combinacion": "5-10-15-20-25",
+        "precio": 2.5,
+        "ganado": 0.0,
+        "reintegro": 3
+    },
+    {
+        "id": 14,
+        "fechaApuesta": "2020-01-01",
+        "combinacion": "10 20 30",
+        "precio": 10.0,
+        "ganado": 5.0,
         "jugador": {
             "correoElectronico": "jugador1@example.com",
             "contrasena": "1234",
             "dni": "123Y",
             "telefono": "123999",
             "dinero": 45.0
-        }
+        },
+        "complementario": 7,
+        "reintegro": 33
     }
 ]

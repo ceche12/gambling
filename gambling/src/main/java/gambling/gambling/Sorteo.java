@@ -33,6 +33,9 @@ public class Sorteo {
 		this.apuestas = apuestas;
 	}
 
+	public Sorteo() {
+	}
+
 	// Getters y setters
 	public int getId() {
 		return id;

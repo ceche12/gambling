@@ -4,13 +4,13 @@ public class Gordo extends Apuesta {
 
 	int nClave;
 
-	public Gordo(int id, String fechaApuesta, String combinacion, double precio, double ganado, Sorteo sorteo,
+	public Gordo(int id, String fechaApuesta, String combinacion, double precio, double ganado, int sorteo,
 			Jugador jugador, int nClave) {
 		super(id, fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 		this.nClave = nClave;
 	}
 
-	public Gordo(String fechaApuesta, String combinacion, double precio, double ganado, Sorteo sorteo, Jugador jugador,
+	public Gordo(String fechaApuesta, String combinacion, double precio, double ganado, int sorteo, Jugador jugador,
 			int nClave) {
 		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 		this.nClave = nClave;

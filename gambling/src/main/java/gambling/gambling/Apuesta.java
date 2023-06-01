@@ -2,7 +2,7 @@ package gambling.gambling;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-@JsonPropertyOrder
+
 public abstract class Apuesta {
 	protected int id;
 	protected String fechaApuesta;
@@ -12,11 +12,11 @@ public abstract class Apuesta {
 	protected double ganado;
 	// se ignora el sorteo por que el sorteo ya contiene apuestas y seria redundante
 	@JsonIgnore
-	protected Sorteo sorteo;
+	protected int sorteo;
 	protected Jugador jugador;
 
 	// Constructor
-	public Apuesta(int id, String fechaApuesta, String combinacion, double precio, double ganado, Sorteo sorteo,
+	public Apuesta(int id, String fechaApuesta, String combinacion, double precio, double ganado, int sorteo,
 			Jugador jugador) {
 		this.id = id;
 		this.fechaApuesta = fechaApuesta;
@@ -28,8 +28,7 @@ public abstract class Apuesta {
 		this.jugador = jugador;
 	}
 
-	public Apuesta(String fechaApuesta, String combinacion, double precio, double ganado, Sorteo sorteo,
-			Jugador jugador) {
+	public Apuesta(String fechaApuesta, String combinacion, double precio, double ganado, int sorteo, Jugador jugador) {
 		this.fechaApuesta = fechaApuesta;
 		this.combinacion = combinacion;
 		// this.tipo = tipo;
@@ -88,11 +87,11 @@ public abstract class Apuesta {
 		this.ganado = ganado;
 	}
 
-	public Sorteo getSorteo() {
+	public int getSorteo() {
 		return sorteo;
 	}
 
-	public void setSorteo(Sorteo sorteo) {
+	public void setSorteo(int sorteo) {
 		this.sorteo = sorteo;
 	}
 

@@ -5,12 +5,12 @@ public class Loteria extends Apuesta {
 	private int reintegro;
 
 	public Loteria(int id, String fechaApuesta, String combinacion,  double precio, double ganado,
-			Sorteo sorteo, Jugador jugador, int reintegro) {
+			int sorteo, Jugador jugador, int reintegro) {
 		super(id, fechaApuesta, combinacion,  precio, ganado, sorteo, jugador);
 		this.reintegro = reintegro;
 	}
 
-	public Loteria(String fechaApuesta, String combinacion,  double precio, double ganado, Sorteo sorteo,
+	public Loteria(String fechaApuesta, String combinacion,  double precio, double ganado, int sorteo,
 			Jugador jugador, int reintegro) {
 		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 		this.reintegro = reintegro;

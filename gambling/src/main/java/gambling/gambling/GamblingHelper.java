@@ -36,20 +36,20 @@ public class GamblingHelper {
 		return conexion;
 	}
 
-	public void cerrarConexion(Connection conex) {
+	public void cerrarConexion(Connection conex) throws SQLException {
 
 		try {
 			if (conex != null)
 				conex.close();
 			System.out.println("conexion cerrada");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		}
 
 	}
 
-	public List<Apuesta> seleccionarApuestas(Connection conexion) {
+	public List<Apuesta> seleccionarApuestas(Connection conexion) throws Exception {
 		List<Apuesta> apuestas = new ArrayList<>();
 		String sql = "select * from apuesta";
 		Statement sentencia = null;
@@ -60,51 +60,111 @@ public class GamblingHelper {
 
 			while (resultado.next()) {
 
-				int idApuesta;
-				String fechaApuesta;
-				String combinacion;
-				double precio;
-				double ganado;
+				int idApuesta = resultado.getInt("id");
+				String fechaApuesta = resultado.getString("fecha_apuesta");
+				String combinacion = resultado.getString("combinacion");
+				double precio = resultado.getDouble("precio");
+				double ganado = resultado.getDouble("ganado");
 
-				// t da un id y qujieres sacar el objeto entero
-				int idSorteo;
-				String correoElectronico;
+				int sorteo = resultado.getInt("id_sorteo");
+				Jugador jugador = jugadorPorMail(conexion, resultado.getString("correo_jugador"));
 
 				String tipo = resultado.getString("tipo");
 				switch (tipo) {
 				case "LOTERIA":
-					// Loteria loteria = new Loteria();
+					int reintegro = resultado.getInt("reintegro");
+					Loteria loteria = new Loteria(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo, jugador,
+							reintegro);
+					apuestas.add(loteria);
 					break;
 				case "QUINIELA":
-
+					Quiniela quiniela = new Quiniela(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo,
+							jugador);
+					apuestas.add(quiniela);
 					break;
 				case "GORDO":
+					int nclave = resultado.getInt("num_clave");
+					Gordo gordo = new Gordo(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo, jugador,
+							nclave);
 
+					apuestas.add(gordo);
 					break;
 				case "PRIMITIVA":
 
+					int complementario = resultado.getInt("complementario");
+					reintegro = resultado.getInt("reintegro");
+					Primitiva primitiva = new Primitiva(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo,
+							jugador, complementario, reintegro);
+					apuestas.add(primitiva);
 					break;
 				case "EUROMILLON":
-
+					String estrellas = resultado.getString("estrellas");
+					Euromillon euromillon = new Euromillon(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo,
+							jugador, estrellas);
+					apuestas.add(euromillon);
 					break;
-
 				default:
 					break;
 				}
 
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 
 		return apuestas;
 	}
 
-	private Sorteo sorteoPorId(Connection conexion, int id) {
-
-	}
+//	private Sorteo sorteoPorId(Connection conexion, int id) {
+//		Sorteo sorteo = new Sorteo();
+//		String sql = "select * from sorteo where id=?";
+//		PreparedStatement sentencia = null;
+//		ResultSet resultado = null;
+//		try {
+//			sentencia = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+//			sentencia.setInt(0, id);
+//
+//			resultado = sentencia.executeQuery();
+//
+//			while (resultado.next()) {
+//				sorteo.setId(resultado.getInt(id));
+//				sorteo.setId(resultado.getInt(id));
+//				sorteo.setId(resultado.getInt(id));
+//				sorteo.setId(resultado.getInt(id));
+//				sorteo.setId(resultado.getInt(id));
+//
+//			}
+//
+//		} catch (Exception e) {
+//		}
+//
+//		return sorteo;
+//	}
 
 	private Jugador jugadorPorMail(Connection conexion, String mail) {
+		Jugador jugador = null;
+		String sql = "select * from jugador where correo_electronico=?";
+		PreparedStatement sentencia = null;
+		ResultSet resultado = null;
+		try {
+			sentencia = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+			sentencia.setString(0, mail);
 
+			resultado = sentencia.executeQuery();
+
+			while (resultado.next()) {
+				jugador.setCorreoElectronico(resultado.getString("correo_electronico"));
+				jugador.setContrasena(resultado.getString("contraseña"));
+				jugador.setDni(resultado.getString("dni"));
+				jugador.setTelefono(resultado.getString("telefono"));
+				jugador.setDinero(resultado.getDouble("dinero"));
+			}
+
+		} catch (Exception e) {
+		}
+
+		return jugador;
 	}
 
 	public List<Apuesta> seleccionarApuestas(Connection conexion, String tipo) {
@@ -119,6 +179,52 @@ public class GamblingHelper {
 			resultado = sentencia.executeQuery();
 
 			while (resultado.next()) {
+
+				int idApuesta = resultado.getInt("id");
+				String fechaApuesta = resultado.getString("fecha_apuesta");
+				String combinacion = resultado.getString("combinacion");
+				double precio = resultado.getDouble("precio");
+				double ganado = resultado.getDouble("ganado");
+
+				int sorteo = resultado.getInt("id_sorteo");
+				Jugador jugador = jugadorPorMail(conexion, resultado.getString("correo_jugador"));
+
+				switch (tipo) {
+				case "LOTERIA":
+					int reintegro = resultado.getInt("reintegro");
+					Loteria loteria = new Loteria(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo, jugador,
+							reintegro);
+					apuestas.add(loteria);
+					break;
+				case "QUINIELA":
+					Quiniela quiniela = new Quiniela(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo,
+							jugador);
+					apuestas.add(quiniela);
+					break;
+				case "GORDO":
+					int nclave = resultado.getInt("num_clave");
+					Gordo gordo = new Gordo(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo, jugador,
+							nclave);
+
+					apuestas.add(gordo);
+					break;
+				case "PRIMITIVA":
+
+					int complementario = resultado.getInt("complementario");
+					reintegro = resultado.getInt("reintegro");
+					Primitiva primitiva = new Primitiva(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo,
+							jugador, complementario, reintegro);
+					apuestas.add(primitiva);
+					break;
+				case "EUROMILLON":
+					String estrellas = resultado.getString("estrellas");
+					Euromillon euromillon = new Euromillon(idApuesta, fechaApuesta, combinacion, precio, ganado, sorteo,
+							jugador, estrellas);
+					apuestas.add(euromillon);
+					break;
+				default:
+					break;
+				}
 
 			}
 
@@ -150,7 +256,7 @@ public class GamblingHelper {
 				sentencia = conex.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 				sentencia.setString(3, "LOTERIA");
 				sentencia.setInt(6, ((Loteria) apuesta).getReintegro());
-				sentencia.setInt(7, apuesta.getSorteo().getId());
+				sentencia.setInt(7, apuesta.getSorteo());
 				sentencia.setString(8, apuesta.getJugador().getCorreoElectronico());
 
 			} else if (apuesta instanceof Gordo) {
@@ -158,7 +264,7 @@ public class GamblingHelper {
 				sentencia = conex.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 				sentencia.setString(3, "GORDO");
 				sentencia.setInt(6, ((Gordo) apuesta).getnClave());
-				sentencia.setInt(7, apuesta.getSorteo().getId());
+				sentencia.setInt(7, apuesta.getSorteo());
 				sentencia.setString(8, apuesta.getJugador().getCorreoElectronico());
 
 			} else if (apuesta instanceof Primitiva) {
@@ -168,7 +274,7 @@ public class GamblingHelper {
 
 				sentencia.setInt(6, ((Primitiva) apuesta).getReintegro());
 				sentencia.setInt(7, ((Primitiva) apuesta).getComplementario());
-				sentencia.setInt(8, apuesta.getSorteo().getId());
+				sentencia.setInt(8, apuesta.getSorteo());
 				sentencia.setString(9, apuesta.getJugador().getCorreoElectronico());
 
 			} else if (apuesta instanceof Euromillon) {
@@ -176,16 +282,16 @@ public class GamblingHelper {
 				sentencia = conex.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 				sentencia.setString(3, "EUROMILLON");
 				sentencia.setString(6, ((Euromillon) apuesta).getEstrellas());
-				sentencia.setInt(7, apuesta.getSorteo().getId());
+				sentencia.setInt(7, apuesta.getSorteo());
 				sentencia.setString(8, apuesta.getJugador().getCorreoElectronico());
 
 			} else if (apuesta instanceof Quiniela) {
 
-				sql = "Insert into apuesta (`fecha_apuesta`,`combinacion`,`tipo`,`precio`,`ganado`,`id_sorteo`,`correo_jugador`) VALUES(?,?,?,?,?,?,?,?) ";
+				sql = "Insert into apuesta (`fecha_apuesta`,`combinacion`,`tipo`,`precio`,`ganado`,`id_sorteo`,`correo_jugador`) VALUES(?,?,?,?,?,?,?) ";
 				sentencia = conex.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 				sentencia.setString(3, "QUINIELA");
 
-				sentencia.setInt(6, apuesta.getSorteo().getId());
+				sentencia.setInt(6, apuesta.getSorteo());
 				sentencia.setString(7, apuesta.getJugador().getCorreoElectronico());
 			}
 

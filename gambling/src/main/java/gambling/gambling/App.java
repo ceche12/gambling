@@ -19,8 +19,8 @@ public class App {
 	 * 
 	 * @param apuestas
 	 */
-	// deberia convertir un sorteo 
-	public void convertirToJson(List<Apuesta> apuestas) {
+	// deberia convertir un sorteo
+	public void convertirApuestasToJson(List<Apuesta> apuestas) {
 		File f = new File("apuestas.json");
 		try {
 			// creación del flujo de salida
@@ -28,6 +28,22 @@ public class App {
 			ObjectMapper om = new ObjectMapper();
 			om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 			String json2write = om.writeValueAsString(apuestas);
+			printWriter.print(json2write);
+			printWriter.flush();
+			printWriter.close();
+		} catch (IOException ex) {
+			System.out.println("Error: " + ex.getLocalizedMessage());
+		}
+	}
+
+	public void convertirSorteoToJson(Sorteo sorteo) {
+		File f = new File("apuestas.json");
+		try {
+			// creación del flujo de salida
+			PrintWriter printWriter = new PrintWriter(new FileWriter(f));
+			ObjectMapper om = new ObjectMapper();
+			om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+			String json2write = om.writeValueAsString(sorteo);
 			printWriter.print(json2write);
 			printWriter.flush();
 			printWriter.close();
@@ -67,15 +83,24 @@ public class App {
 	public static void main(String[] args) throws Exception {
 		GamblingHelper gambling = new GamblingHelper();
 		App app = new App();
-		// Connection conex = gambling.crearConexion();
+		Connection conex = gambling.crearConexion();
 
 		Sorteo sorteo = new Sorteo(1, "2020-01-01", "2020-01-02", "2023-06-01 12:34:56", "prueb", "PRIMITIVA", null);
 		Jugador jugador = new Jugador("jugador1@example.com", "1234", "123Y", "123999", 45);
-		Primitiva prim = new Primitiva("2020-01-01", "10 20 30", 10, 5, sorteo, jugador, 7, 33);
-		// gambling.insertarApuesta(conex, prim);
-		List<Apuesta> apuestas = new ArrayList();
+		Primitiva prim = new Primitiva("2020-01-01", "10 20 30", 10, 5, 1, jugador, 7, 33);
+		Quiniela quin = new Quiniela("2020-01-01", "10 20 30", 10, 5, 1, jugador);
+		Gordo gordo = new Gordo("2022-01-01", "123456", 10.0, 0.0, 1, jugador, 7);
+		Euromillon euromillon = new Euromillon("2023-06-01", "10-15-20-25-30", 2.0, 0.0, 1, jugador, "2-4");
+		Loteria loteria = new Loteria("2023-05-15", "5-10-15-20-25", 2.5, 0.0, 1, jugador, 3);
+
+		gambling.insertarApuesta(conex, prim);
+		gambling.insertarApuesta(conex, quin);
+		gambling.insertarApuesta(conex, gordo);
+		gambling.insertarApuesta(conex, euromillon);
+		gambling.insertarApuesta(conex, loteria);
+		List<Apuesta> apuestas = gambling.seleccionarApuestas(conex);
 		apuestas.add(prim);
-		app.convertirToJson(apuestas);
-		// gambling.cerrarConexion(conex);
+		app.convertirApuestasToJson(apuestas);
+		gambling.cerrarConexion(conex);
 	}
 }
