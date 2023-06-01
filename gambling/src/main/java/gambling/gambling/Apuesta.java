@@ -1,14 +1,14 @@
 package gambling.gambling;
 
 public abstract class Apuesta {
-	private int id;
-	private String fechaApuesta;
-	private String combinacion;
-	private String tipo;
-	private double precio;
-	private boolean ganado;
-	private Sorteo sorteo;
-	private Jugador jugador;
+	protected int id;
+	protected String fechaApuesta;
+	protected String combinacion;
+	protected String tipo;
+	protected double precio;
+	protected boolean ganado;
+	protected Sorteo sorteo;
+	protected Jugador jugador;
 
 	// Constructor
 	public Apuesta(int id, String fechaApuesta, String combinacion, String tipo, double precio, boolean ganado,
