@@ -1,6 +1,6 @@
 package gambling.gambling;
 
-/*
+/**
  * Hello world!
  *
  */
