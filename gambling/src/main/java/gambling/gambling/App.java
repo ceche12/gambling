@@ -99,8 +99,11 @@ public class App {
 		gambling.insertarApuesta(conex, euromillon);
 		gambling.insertarApuesta(conex, loteria);
 		List<Apuesta> apuestas = gambling.seleccionarApuestas(conex);
+		System.out.println(apuestas);
 		apuestas.add(prim);
 		app.convertirApuestasToJson(apuestas);
 		gambling.cerrarConexion(conex);
+		apuestas = app.jsonToLista("apuestas.json");
+		System.out.println(apuestas);
 	}
 }

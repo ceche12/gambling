@@ -67,7 +67,8 @@ public class GamblingHelper {
 				double ganado = resultado.getDouble("ganado");
 
 				int sorteo = resultado.getInt("id_sorteo");
-				Jugador jugador = jugadorPorMail(conexion, resultado.getString("correo_jugador"));
+				String mail = resultado.getString("correo_jugador");
+				Jugador jugador = jugadorPorMail(conexion, mail);
 
 				String tipo = resultado.getString("tipo");
 				switch (tipo) {
@@ -148,14 +149,14 @@ public class GamblingHelper {
 //	}
 
 	private Jugador jugadorPorMail(Connection conexion, String mail) throws SQLException {
-		Jugador jugador = null;
+		Jugador jugador = new Jugador();
 		String sql = "select * from jugador where correo_electronico=?";
 		PreparedStatement sentencia = null;
 		ResultSet resultado = null;
 		try {
 			sentencia = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-			sentencia.setString(0, mail);
-
+			sentencia.setString(1, mail);
+System.out.println("asdasdasd");
 			resultado = sentencia.executeQuery();
 
 			while (resultado.next()) {

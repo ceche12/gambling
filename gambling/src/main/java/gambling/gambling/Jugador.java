@@ -16,6 +16,10 @@ public class Jugador {
 		this.dinero = dinero;
 	}
 
+	public Jugador() {
+		// TODO Auto-generated constructor stub
+	}
+
 	// Getters y setters
 	public String getCorreoElectronico() {
 		return correoElectronico;
