@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -70,7 +73,7 @@ public class App {
 				jsonApuestas.set("Quiniela", arrayQuiniela);
 				jsonApuestas.set("Gordo", arrayGordo);
 				jsonApuestas.set("Euromillon", arrayEuromillon);
-				jsonApuestas.set("Primitva", arrayPrimitiva);
+				jsonApuestas.set("Primitiva", arrayPrimitiva);
 
 				// Agregar el objeto JSON de apuestas al objeto JSON principal
 				jsonPrincipal.set("Apuesta", jsonApuestas);
@@ -108,24 +111,110 @@ public class App {
 	 * @param fichero
 	 */
 	public List<Apuesta> jsonToLista(String fichero) {
-//
-		List<Apuesta> apuestas = null;
-		File f = new File(fichero);
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-//			apuestas = new ObjectMapper().readValue(f, new TypeReference<List<Apuesta>>() {
-//			});
-			apuestas = objectMapper.readValue(f, new TypeReference<List<Apuesta>>() {
-			});
-			objectMapper.readv
-		} catch (IOException ex) {
-			System.out.println("Error: " + ex.getLocalizedMessage());
-			ex.printStackTrace();
+		File file = new File(fichero);
 
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode jsonNode;
+		List<Apuesta> apuestaList = new ArrayList<>();
+		try {
+
+			JsonNode rootNode = objectMapper.readTree(file);
+			ArrayNode apuestasNode = (ArrayNode) rootNode.get("Apuesta");
+
+//			List<Apuesta> Apu = objectMapper.readValue(jsonNode.get("Apuesta").toString(),
+//					new TypeReference<List<Apuesta>>() {
+//					});
+
+			// Deserializar cada tipo de apuesta por separado
+//			List<Loteria> loteriaList = objectMapper.readValue(jsonNode.get("Loteria").toString(),
+//					new TypeReference<List<Loteria>>() {
+//					});
+//			List<Quiniela> quinielaList = objectMapper.readValue(jsonNode.get("Quiniela").toString(),
+//					new TypeReference<List<Quiniela>>() {
+//					});
+//			List<Gordo> gordoList = objectMapper.readValue(jsonNode.get("Gordo").toString(),
+//					new TypeReference<List<Gordo>>() {
+//					});
+//			List<Euromillon> euromillonList = objectMapper.readValue(jsonNode.get("Euromillon").toString(),
+//					new TypeReference<List<Euromillon>>() {
+//					});
+//			List<Primitiva> primitivaList = objectMapper.readValue(jsonNode.get("Primitiva").toString(),
+//					new TypeReference<List<Primitiva>>() {
+//					});
+			// Combinar las listas de apuestas en una lista general
+
+//			apuestaList.addAll(loteriaList);
+//			apuestaList.addAll(quinielaList);
+//			apuestaList.addAll(gordoList);
+//			apuestaList.addAll(euromillonList);
+//			apuestaList.addAll(primitivaList);
+
+			// Imprimir la lista de apuestas
+			for (Apuesta apuesta : apuestaList) {
+				System.out.println(apuesta);
+			}
+		} catch (JsonMappingException e) {
+
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
 		}
-//		if (apuestas != null) {
-//			System.out.println(apuestas);
+
+		return apuestaList;
+	}
+
+	public List<Apuesta> jsonToListaPurebas(String fichero) {
+		File file = new File(fichero);
+		List<Apuesta> apuestas = new ArrayList<>();
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		File jsonFile = new File(fichero);
+
+//		try {
+//			JsonNode rootNode = objectMapper.readTree(jsonFile);
+//
+//			for (JsonNode node : rootNode) {
+//				System.out.println(node);
+//				Loteria loteriaList = objectMapper.treeToValue(node, Loteria.class);
+//				System.out.println(loteriaList);
+//			}
+//
+//			// Imprimir el contenido del array
+//			for (Apuesta apu : apuestas) {
+//				System.out.println(apu);
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
 //		}
+
+		try {
+			JsonNode rootNode = objectMapper.readTree(file);
+			List<Loteria> loterias = new ArrayList<>();
+
+			JsonNode loteriaNode = rootNode.get(0).get("Loteria");
+			if (loteriaNode != null && loteriaNode.isArray()) {
+				for (JsonNode node : loteriaNode) {
+					System.out.println(node);
+					Loteria loteria =  objectMapper.readValue(node.toString(), Loteria.class);
+					System.out.println(loteria);
+					System.out.println(loterias);
+				}
+			}
+
+			// La lista de objetos Loteria está lista para su uso
+			for (Loteria loteria : loterias) {
+				System.out.println(loteria.getId());
+				System.out.println(loteria.getFechaApuesta());
+				// Imprimir otros atributos de la Loteria si es necesario
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return apuestas;
 	}
@@ -159,9 +248,9 @@ public class App {
 		// System.out.println(apuestas);
 
 		gambling.cerrarConexion(conex);
-	//	app.convertirApuestasToJson(apuestas);
+//		 app.convertirApuestasToJson(apuestas);
 
-		apuestas = app.jsonToLista("apuestas.json");
+		apuestas = app.jsonToListaPurebas("apuestas.json");
 		System.out.println(apuestas);
 	}
 }
