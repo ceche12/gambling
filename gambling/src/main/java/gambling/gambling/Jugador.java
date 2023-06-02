@@ -60,4 +60,11 @@ public class Jugador {
 	public void setDinero(double dinero) {
 		this.dinero = dinero;
 	}
+
+	@Override
+	public String toString() {
+		return "Jugador [correoElectronico=" + correoElectronico + ", contrasena=" + contrasena + ", dni=" + dni
+				+ ", telefono=" + telefono + ", dinero=" + dinero + "]";
+	}
+
 }

@@ -1,5 +1,7 @@
 package gambling.gambling;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 public class Loteria extends Apuesta {
 
 	private int reintegro;
@@ -14,6 +16,9 @@ public class Loteria extends Apuesta {
 			int reintegro) {
 		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 		this.reintegro = reintegro;
+	}
+
+	public Loteria() {
 	}
 
 	public int getReintegro() {

@@ -1,5 +1,7 @@
 package gambling.gambling;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 public class Primitiva extends Apuesta {
 
 	int complementario;
@@ -17,6 +19,10 @@ public class Primitiva extends Apuesta {
 		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 		this.complementario = complementario;
 		this.reintegro = reintegro;
+	}
+
+	public Primitiva() {
+
 	}
 
 	public int getComplementario() {

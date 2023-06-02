@@ -1,5 +1,7 @@
 package gambling.gambling;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 public class Gordo extends Apuesta {
 
 	int nClave;
@@ -14,6 +16,10 @@ public class Gordo extends Apuesta {
 			int nClave) {
 		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 		this.nClave = nClave;
+	}
+
+	public Gordo() {
+
 	}
 
 	public int getnClave() {

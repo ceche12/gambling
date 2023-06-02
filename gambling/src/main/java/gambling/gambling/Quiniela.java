@@ -1,5 +1,7 @@
 package gambling.gambling;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 public class Quiniela extends Apuesta {
 
 	public Quiniela(int id, String fechaApuesta, String combinacion, double precio, double ganado, int sorteo,
@@ -10,6 +12,10 @@ public class Quiniela extends Apuesta {
 	public Quiniela(String fechaApuesta, String combinacion, double precio, double ganado, int sorteo,
 			Jugador jugador) {
 		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
+	}
+
+	public Quiniela() {
+
 	}
 
 	@Override

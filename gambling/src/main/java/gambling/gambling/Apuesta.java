@@ -3,8 +3,9 @@ package gambling.gambling;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class Apuesta {
 	protected int id;
 	protected String fechaApuesta;
@@ -38,6 +39,10 @@ public abstract class Apuesta {
 		this.ganado = ganado;
 		this.sorteo = sorteo;
 		this.jugador = jugador;
+	}
+
+	public Apuesta() {
+
 	}
 
 	// Getters y setters

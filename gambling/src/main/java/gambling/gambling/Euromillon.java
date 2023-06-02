@@ -1,5 +1,7 @@
 package gambling.gambling;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 public class Euromillon extends Apuesta {
 
 	String estrellas;
@@ -14,6 +16,10 @@ public class Euromillon extends Apuesta {
 			Jugador jugador, String estrellas) {
 		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 		this.estrellas = estrellas;
+	}
+
+	public Euromillon() {
+
 	}
 
 	public String getEstrellas() {
