@@ -1,15 +1,11 @@
 package gambling.gambling;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public abstract class Apuesta {
 	protected int id;
 	protected String fechaApuesta;
 	protected String combinacion;
 	protected double precio;
 	protected double ganado;
-	// se ignora el sorteo por que el sorteo ya contiene apuestas y seria redundante
-	@JsonIgnore
 	protected int sorteo;
 	protected Jugador jugador;
 
@@ -25,7 +21,6 @@ public abstract class Apuesta {
 		this.sorteo = sorteo;
 		this.jugador = jugador;
 	}
-
 
 	public Apuesta(String fechaApuesta, String combinacion, double precio, double ganado, int sorteo, Jugador jugador) {
 		this.fechaApuesta = fechaApuesta;

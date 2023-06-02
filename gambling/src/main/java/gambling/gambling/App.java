@@ -6,11 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,44 +159,35 @@ public class App {
 
 		Sorteo sorteo = new Sorteo(1, "2020-01-01", "2020-01-02", "2023-06-01 12:34:56", "prueb", "PRIMITIVA", null);
 
-//		Jugador jugador = new Jugador("jugador1@example.com", "1234", "123Y", "123999", 45);
-//		Primitiva prim = new Primitiva("2020-01-01", "10 20 30", 10, 5, 1, jugador, 7, 33);
-//		Quiniela quin = new Quiniela("2020-01-01", "10 20 30", 10, 5, 1, jugador);
-//		Gordo gordo = new Gordo("2022-01-01", "123456", 10.0, 0.0, 1, jugador, 7);
-//		Euromillon euromillon = new Euromillon("2023-06-01", "10-15-20-25-30", 2.0, 0.0, 1, jugador, "2-4");
-//		Loteria loteria = new Loteria("2023-05-15", "5-10-15-20-25", 2.5, 0.0, 1, jugador, 3);
-//
-//		gambling.insertarApuesta(conex, prim);
-//		gambling.insertarApuesta(conex, quin);
-//		gambling.insertarApuesta(conex, gordo);
-//		gambling.insertarApuesta(conex, euromillon);
-//		gambling.insertarApuesta(conex, loteria);
+		Jugador jugador = new Jugador("jugador1@example.com", "1234", "123Y", "123999", 45);
+		Primitiva prim = new Primitiva("2020-01-01", "10 20 30", 10, 5, 1, jugador, 7, 33);
+		Quiniela quin = new Quiniela("2020-01-01", "10 20 30", 10, 5, 1, jugador);
+		Gordo gordo = new Gordo("2022-01-01", "123456", 10.0, 0.0, 1, jugador, 7);
+		Euromillon euromillon = new Euromillon("2023-06-01", "10-15-20-25-30", 2.0, 0.0, 1, jugador, "2-4");
+		Loteria loteria = new Loteria("2023-05-15", "5-10-15-20-25", 2.5, 0.0, 1, jugador, 3);
+
+		gambling.insertarApuesta(conex, prim);
+		gambling.insertarApuesta(conex, quin);
+		gambling.insertarApuesta(conex, gordo);
+		gambling.insertarApuesta(conex, euromillon);
+		gambling.insertarApuesta(conex, loteria);
 		List<Apuesta> apuestas = gambling.seleccionarApuestas(conex);
 //		// System.out.println(apuestas);
-		gambling.cerrarConexion(conex);
-
-		app.convertirApuestasToJson(apuestas);
-//		app.jsonToLista("apuestas.json");
 
 		app.convertirApuestasToJson(apuestas);
 		app.jsonToLista("apuestas.json");
 
-//		sorteo.setApuestas(apuestas);
-//		ObjectMapper om = new ObjectMapper();
-//		om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-//		String json2write = om.writeValueAsString(sorteo);
-//		System.out.println("\n \n");
-//		System.out.println(json2write);
-//
-//		Sorteo e = null;
-//
-//		e = new ObjectMapper().readValue(json2write, Sorteo.class);
+		app.convertirApuestasToJson(apuestas);
+		app.jsonToLista("apuestas.json");
 
-		Jugador jugador = new Jugador("correo@example.com", "password", "12345678A", "123456789", 100.0);
+		jugador = new Jugador("correo@example.com", "password", "12345678A", "123456789", 100.0);
 
-		gambling.insertarJugador(conex, jugador);
+		// gambling.insertarJugador(conex, jugador);
 
 		gambling.buscarApuestasPorJugador(conex, jugador);
 		gambling.insertarSorteo(conex, sorteo);
+
+		gambling.cerrarConexion(conex);
+
 	}
 }

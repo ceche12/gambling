@@ -337,11 +337,14 @@ public class GamblingHelper {
 					sorteo.setId(id);
 				}
 			}
-
-			for (Apuesta apuesta : sorteo.getApuestas()) {
-				apuesta.setSorteo(sorteo.getId());
-				insertarApuesta(connection, apuesta);
+			List<Apuesta> apuestas = sorteo.getApuestas();
+			if (apuestas != null) {
+				for (Apuesta apuesta : apuestas) {
+					apuesta.setSorteo(sorteo.getId());
+					insertarApuesta(connection, apuesta);
+				}
 			}
+
 			connection.commit();
 			System.out.println("SORTEO AÑADIDO");
 		} catch (SQLException e) {
