@@ -26,7 +26,9 @@ public class Gordo extends Apuesta {
 
 	@Override
 	public String toString() {
-		return "Gordo [nClave=" + nClave + "]";
+		return "Gordo [nClave=" + nClave + ", id=" + id + ", fechaApuesta=" + fechaApuesta + ", combinacion="
+				+ combinacion + ", precio=" + precio + ", ganado=" + ganado + ", sorteo=" + sorteo + ", jugador="
+				+ jugador + "]";
 	}
 
 }

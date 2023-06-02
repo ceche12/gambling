@@ -57,14 +57,19 @@ public class App {
 	 * @param fichero
 	 */
 	public List<Apuesta> jsonToLista(String fichero) {
-
+//
 		List<Apuesta> apuestas = new ArrayList();
+		File f = new File(fichero);
+		ObjectMapper objectMapper = new ObjectMapper();
 		try {
-			apuestas = (List<Apuesta>) new ObjectMapper().readValue(fichero, new TypeReference<List<Apuesta>>() {
+//			apuestas = new ObjectMapper().readValue(f, new TypeReference<List<Apuesta>>() {
+//			});
+			apuestas = objectMapper.readValue(f, new TypeReference<List<Apuesta>>() {
 			});
-
 		} catch (IOException ex) {
 			System.out.println("Error: " + ex.getLocalizedMessage());
+			ex.printStackTrace();
+
 		}
 //		if (apuestas != null) {
 //			System.out.println(apuestas);

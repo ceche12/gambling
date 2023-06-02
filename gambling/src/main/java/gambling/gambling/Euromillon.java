@@ -26,7 +26,9 @@ public class Euromillon extends Apuesta {
 
 	@Override
 	public String toString() {
-		return "Euromillon [estrellas=" + estrellas + "]";
+		return "Euromillon [estrellas=" + estrellas + ", id=" + id + ", fechaApuesta=" + fechaApuesta + ", combinacion="
+				+ combinacion + ", precio=" + precio + ", ganado=" + ganado + ", sorteo=" + sorteo + ", jugador="
+				+ jugador + "]";
 	}
 
 }

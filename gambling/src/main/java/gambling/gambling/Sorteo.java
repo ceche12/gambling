@@ -92,4 +92,12 @@ public class Sorteo {
 	public void setApuestas(List<Apuesta> apuestas) {
 		this.apuestas = apuestas;
 	}
+
+	@Override
+	public String toString() {
+		return "Sorteo [id=" + id + ", fechaApertura=" + fechaApertura + ", fechaCierre=" + fechaCierre
+				+ ", fechaHoraCelebracion=" + fechaHoraCelebracion + ", resultado=" + resultado + ", tipo=" + tipo
+				+ ", apuestas=" + apuestas + "]";
+	}
+
 }

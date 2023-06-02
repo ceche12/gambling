@@ -1,8 +1,10 @@
 package gambling.gambling;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class Apuesta {
 	protected int id;
 	protected String fechaApuesta;

@@ -12,4 +12,10 @@ public class Quiniela extends Apuesta {
 		super(fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
 	}
 
+	@Override
+	public String toString() {
+		return "Quiniela [id=" + id + ", fechaApuesta=" + fechaApuesta + ", combinacion=" + combinacion + ", precio="
+				+ precio + ", ganado=" + ganado + ", sorteo=" + sorteo + ", jugador=" + jugador + "]";
+	}
+
 }

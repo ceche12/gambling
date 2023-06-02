@@ -37,7 +37,9 @@ public class Primitiva extends Apuesta {
 
 	@Override
 	public String toString() {
-		return "Primitva [complementario=" + complementario + ", reintegro=" + reintegro + "]";
+		return "Primitiva [complementario=" + complementario + ", reintegro=" + reintegro + ", id=" + id
+				+ ", fechaApuesta=" + fechaApuesta + ", combinacion=" + combinacion + ", precio=" + precio + ", ganado="
+				+ ganado + ", sorteo=" + sorteo + ", jugador=" + jugador + "]";
 	}
 
 }
