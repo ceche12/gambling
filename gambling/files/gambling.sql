@@ -44,3 +44,10 @@ CREATE TABLE apuesta (
 alter table apuesta ADD INDEX fecha_apuesta (fecha_apuesta);
 
 
+
+INSERT INTO jugador (correo_electronico, contraseña, dni, telefono, dinero)
+VALUES ('jugador1@example.com', 'contraseña1', '1234567890', '1234567890', 100.00);
+
+
+INSERT INTO apuesta (fecha_apuesta, combinacion, tipo, precio, ganado, reintegro, estrellas, num_clave, complementario, id_sorteo, correo_jugador)
+VALUES ('2023-06-01', '1-2-3-4-5', 'LOTERIA', 10.00, NULL, 0, NULL, NULL, NULL, 1, 'jugador1@example.com');
