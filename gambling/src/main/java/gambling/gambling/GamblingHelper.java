@@ -342,14 +342,16 @@ public class GamblingHelper {
 				apuesta.setSorteo(sorteo.getId());
 				insertarApuesta(connection, apuesta);
 			}
+			connection.commit();
 			System.out.println("SORTEO AÑADIDO");
 		} catch (SQLException e) {
+			connection.rollback();
 			e.printStackTrace();
 			throw e;
 		}
 	}
 
-	public void insertarJugador(Connection connection, Jugador jugador) {
+	public void insertarJugador(Connection connection, Jugador jugador) throws SQLException {
 		String sql = "INSERT INTO jugador (correo_electronico, contraseña, dni, telefono, dinero) "
 				+ "VALUES (?, ?, ?, ?, ?)";
 
@@ -362,13 +364,16 @@ public class GamblingHelper {
 			statement.setDouble(5, jugador.getDinero());
 
 			statement.executeUpdate();
+			connection.commit();
 			System.out.println("JUGADOR AGREGADO");
+
 		} catch (Exception e) {
+			connection.rollback();
 			e.printStackTrace();
 		}
 	}
 
-	public List<Apuesta> buscarApuestasPorJugador(Connection connection, String jugadorDni) throws SQLException {
+	public List<Apuesta> buscarApuestasPorJugador(Connection connection, Jugador jugador) throws SQLException {
 		String sql = "SELECT * FROM apuesta WHERE correo_jugador = ? ORDER BY fecha_apuesta";
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -376,7 +381,7 @@ public class GamblingHelper {
 
 		try {
 			statement = connection.prepareStatement(sql);
-			statement.setString(1, jugadorDni);
+			statement.setString(1, jugador.getDni());
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {

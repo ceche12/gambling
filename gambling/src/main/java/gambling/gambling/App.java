@@ -199,7 +199,7 @@ public class App {
 
 		gambling.insertarJugador(conex, jugador);
 
-		gambling.buscarApuestasPorJugador(conex, "12345678A");
+		gambling.buscarApuestasPorJugador(conex, jugador);
 		gambling.insertarSorteo(conex, sorteo);
 	}
 }
