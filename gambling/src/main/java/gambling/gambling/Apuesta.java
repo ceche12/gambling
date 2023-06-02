@@ -31,6 +31,7 @@ public abstract class Apuesta {
 		this.jugador = jugador;
 	}
 
+
 	public Apuesta(String fechaApuesta, String combinacion, double precio, double ganado, int sorteo, Jugador jugador) {
 		this.fechaApuesta = fechaApuesta;
 		this.combinacion = combinacion;

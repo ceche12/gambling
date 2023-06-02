@@ -1,0 +1,17 @@
+{
+  "Apuestas" : [ {
+    "id" : 39,
+    "fechaApuesta" : "2022-01-01",
+    "combinacion" : "123456",
+    "precio" : 10.0,
+    "ganado" : 0.0,
+    "jugador" : {
+      "correoElectronico" : "jugador1@example.com",
+      "contrasena" : "contraseña1",
+      "dni" : "1234567890",
+      "telefono" : "1234567890",
+      "dinero" : 100.0
+    },
+    "nClave" : 7
+  } ]
+}
