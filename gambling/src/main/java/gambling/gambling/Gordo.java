@@ -1,6 +1,6 @@
 package gambling.gambling;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
+
 
 public class Gordo extends Apuesta {
 

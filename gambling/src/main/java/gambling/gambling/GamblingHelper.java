@@ -14,7 +14,6 @@ import java.util.Properties;
 
 public class GamblingHelper {
 
-	// TODO cerrar cosas (statements resultsets etc)
 	public Connection crearConexion() throws Exception {
 		Connection conexion = null;
 		try {
@@ -121,32 +120,6 @@ public class GamblingHelper {
 
 		return apuestas;
 	}
-
-//	private Sorteo sorteoPorId(Connection conexion, int id) {
-//		Sorteo sorteo = new Sorteo();
-//		String sql = "select * from sorteo where id=?";
-//		PreparedStatement sentencia = null;
-//		ResultSet resultado = null;
-//		try {
-//			sentencia = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-//			sentencia.setInt(0, id);
-//
-//			resultado = sentencia.executeQuery();
-//
-//			while (resultado.next()) {
-//				sorteo.setId(resultado.getInt(id));
-//				sorteo.setId(resultado.getInt(id));
-//				sorteo.setId(resultado.getInt(id));
-//				sorteo.setId(resultado.getInt(id));
-//				sorteo.setId(resultado.getInt(id));
-//
-//			}
-//
-//		} catch (Exception e) {
-//		}
-//
-//		return sorteo;
-//	}
 
 	private Jugador jugadorPorMail(Connection conexion, String mail) throws SQLException {
 		Jugador jugador = new Jugador();

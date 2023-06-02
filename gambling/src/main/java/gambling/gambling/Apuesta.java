@@ -1,16 +1,11 @@
 package gambling.gambling;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 public abstract class Apuesta {
 	protected int id;
 	protected String fechaApuesta;
 	protected String combinacion;
-//	protected String tipo;
 	protected double precio;
 	protected double ganado;
 	// se ignora el sorteo por que el sorteo ya contiene apuestas y seria redundante
@@ -24,7 +19,7 @@ public abstract class Apuesta {
 		this.id = id;
 		this.fechaApuesta = fechaApuesta;
 		this.combinacion = combinacion;
-		// this.tipo = tipo;
+
 		this.precio = precio;
 		this.ganado = ganado;
 		this.sorteo = sorteo;
@@ -34,7 +29,7 @@ public abstract class Apuesta {
 	public Apuesta(String fechaApuesta, String combinacion, double precio, double ganado, int sorteo, Jugador jugador) {
 		this.fechaApuesta = fechaApuesta;
 		this.combinacion = combinacion;
-		// this.tipo = tipo;
+
 		this.precio = precio;
 		this.ganado = ganado;
 		this.sorteo = sorteo;
@@ -70,14 +65,6 @@ public abstract class Apuesta {
 		this.combinacion = combinacion;
 	}
 
-//	public String getTipo() {
-//		return tipo;
-//	}
-//
-//	public void setTipo(String tipo) {
-//		this.tipo = tipo;
-//	}
-
 	public double getPrecio() {
 		return precio;
 	}
@@ -109,4 +96,11 @@ public abstract class Apuesta {
 	public void setJugador(Jugador jugador) {
 		this.jugador = jugador;
 	}
+
+	@Override
+	public String toString() {
+		return "Apuesta [id=" + id + ", fechaApuesta=" + fechaApuesta + ", combinacion=" + combinacion + ", precio="
+				+ precio + ", ganado=" + ganado + ", sorteo=" + sorteo + ", jugador=" + jugador + "]";
+	}
+
 }

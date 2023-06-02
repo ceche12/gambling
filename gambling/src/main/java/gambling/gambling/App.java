@@ -5,21 +5,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
+
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public class App {
 	/**
@@ -27,7 +25,6 @@ public class App {
 	 * 
 	 * @param apuestas
 	 */
-	// deberia convertir un sorteo
 	public void convertirApuestasToJson(List<Apuesta> apuestas) {
 		File f = new File("apuestas.json");
 		try {
@@ -82,7 +79,6 @@ public class App {
 
 			}
 
-			// String json2write = new ObjectMapper().writeValueAsString(e);
 			printWriter.print(jsonPrincipal);
 
 			printWriter.flush();
@@ -148,58 +144,6 @@ public class App {
 		return apuestas;
 	}
 
-	public List<Apuesta> jsonToListaPurebas(String fichero) {
-		File file = new File(fichero);
-		List<Apuesta> apuestas = new ArrayList<>();
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		File jsonFile = new File(fichero);
-
-//		try {
-//			JsonNode rootNode = objectMapper.readTree(jsonFile);
-//
-//			for (JsonNode node : rootNode) {
-//				System.out.println(node);
-//				Loteria loteriaList = objectMapper.treeToValue(node, Loteria.class);
-//				System.out.println(loteriaList);
-//			}
-//
-//			// Imprimir el contenido del array
-//			for (Apuesta apu : apuestas) {
-//				System.out.println(apu);
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-
-		try {
-			JsonNode rootNode = objectMapper.readTree(file);
-			List<Loteria> loterias = new ArrayList<>();
-
-			JsonNode loteriaNode = rootNode.get(0).get("Loteria");
-			if (loteriaNode != null && loteriaNode.isArray()) {
-				for (JsonNode node : loteriaNode) {
-					System.out.println(node);
-					Loteria loteria = objectMapper.readValue(node.toString(), Loteria.class);
-					System.out.println(loteria);
-					System.out.println(loterias);
-				}
-			}
-
-			// La lista de objetos Loteria está lista para su uso
-			for (Loteria loteria : loterias) {
-				System.out.println(loteria.getId());
-				System.out.println(loteria.getFechaApuesta());
-				// Imprimir otros atributos de la Loteria si es necesario
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return apuestas;
-	}
-
 	public void InsertarLista(Connection conex, List<Apuesta> apuestas) throws SQLException {
 		GamblingHelper gambling = new GamblingHelper();
 		for (Apuesta apuesta : apuestas) {
@@ -212,7 +156,7 @@ public class App {
 		App app = new App();
 		Connection conex = gambling.crearConexion();
 
-//		Sorteo sorteo = new Sorteo(1, "2020-01-01", "2020-01-02", "2023-06-01 12:34:56", "prueb", "PRIMITIVA", null);
+		Sorteo sorteo = new Sorteo(1, "2020-01-01", "2020-01-02", "2023-06-01 12:34:56", "prueb", "PRIMITIVA", null);
 //		Jugador jugador = new Jugador("jugador1@example.com", "1234", "123Y", "123999", 45);
 //		Primitiva prim = new Primitiva("2020-01-01", "10 20 30", 10, 5, 1, jugador, 7, 33);
 //		Quiniela quin = new Quiniela("2020-01-01", "10 20 30", 10, 5, 1, jugador);
@@ -231,7 +175,18 @@ public class App {
 
 		app.convertirApuestasToJson(apuestas);
 		app.jsonToLista("apuestas.json");
+		
+		
+//		sorteo.setApuestas(apuestas);
+//		ObjectMapper om = new ObjectMapper();
+//		om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//		String json2write = om.writeValueAsString(sorteo);
+//		System.out.println("\n \n");
+//		System.out.println(json2write);
+//
+//		Sorteo e = null;
+//
+//		e = new ObjectMapper().readValue(json2write, Sorteo.class);
 
 	}
-
 }

@@ -1,6 +1,5 @@
 package gambling.gambling;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 
 public class Loteria extends Apuesta {
 

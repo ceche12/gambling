@@ -1,7 +1,5 @@
 package gambling.gambling;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 public class Primitiva extends Apuesta {
 
 	int complementario;
