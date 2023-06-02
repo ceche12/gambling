@@ -1,1 +1,104 @@
-[{"id":26,"fechaApuesta":"2023-05-15","combinacion":"5-10-15-20-25","precio":2.5,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"reintegro":3},{"id":27,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"complementario":7,"reintegro":33},{"id":28,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0}},{"id":29,"fechaApuesta":"2022-01-01","combinacion":"123456","precio":10.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"nClave":7},{"id":30,"fechaApuesta":"2023-06-01","combinacion":"10-15-20-25-30","precio":2.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"estrellas":"2-4"},{"id":31,"fechaApuesta":"2023-05-15","combinacion":"5-10-15-20-25","precio":2.5,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"reintegro":3},{"id":32,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"complementario":7,"reintegro":33},{"id":33,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0}},{"id":34,"fechaApuesta":"2022-01-01","combinacion":"123456","precio":10.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"nClave":7},{"id":35,"fechaApuesta":"2023-06-01","combinacion":"10-15-20-25-30","precio":2.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"estrellas":"2-4"},{"id":36,"fechaApuesta":"2023-05-15","combinacion":"5-10-15-20-25","precio":2.5,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"reintegro":3},{"id":37,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"complementario":7,"reintegro":33},{"id":38,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0}},{"id":39,"fechaApuesta":"2022-01-01","combinacion":"123456","precio":10.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"nClave":7},{"id":40,"fechaApuesta":"2023-06-01","combinacion":"10-15-20-25-30","precio":2.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"estrellas":"2-4"},{"id":41,"fechaApuesta":"2023-05-15","combinacion":"5-10-15-20-25","precio":2.5,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"reintegro":3},{"id":42,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"complementario":7,"reintegro":33},{"id":43,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0}},{"id":44,"fechaApuesta":"2022-01-01","combinacion":"123456","precio":10.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"nClave":7},{"id":45,"fechaApuesta":"2023-06-01","combinacion":"10-15-20-25-30","precio":2.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"estrellas":"2-4"},{"id":46,"fechaApuesta":"2023-05-15","combinacion":"5-10-15-20-25","precio":2.5,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"reintegro":3},{"id":47,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"complementario":7,"reintegro":33},{"id":48,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0}},{"id":49,"fechaApuesta":"2022-01-01","combinacion":"123456","precio":10.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"nClave":7},{"id":50,"fechaApuesta":"2023-06-01","combinacion":"10-15-20-25-30","precio":2.0,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"estrellas":"2-4"},{"id":51,"fechaApuesta":"2023-05-15","combinacion":"5-10-15-20-25","precio":2.5,"ganado":0.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"contraseña1","dni":"1234567890","telefono":"1234567890","dinero":100.0},"reintegro":3},{"id":47,"fechaApuesta":"2020-01-01","combinacion":"10 20 30","precio":10.0,"ganado":5.0,"jugador":{"correoElectronico":"jugador1@example.com","contrasena":"1234","dni":"123Y","telefono":"123999","dinero":45.0},"complementario":7,"reintegro":33}]
+[
+	{
+		"Loteria": [
+			{
+				"id": 51,
+				"fechaApuesta": "2023-05-15",
+				"combinacion": "5-10-15-20-25",
+				"precio": 2.5,
+				"ganado": 0.0,
+				"jugador": {
+					"correoElectronico": "jugador1@example.com",
+					"contrasena": "contraseña1",
+					"dni": "1234567890",
+					"telefono": "1234567890",
+					"dinero": 100.0
+				},
+				"reintegro": 3
+			},
+			{
+				"id": 56,
+				"fechaApuesta": "2023-05-15",
+				"combinacion": "5-10-15-20-25",
+				"precio": 2.5,
+				"ganado": 0.0,
+				"jugador": {
+					"correoElectronico": "jugador1@example.com",
+					"contrasena": "contraseña1",
+					"dni": "1234567890",
+					"telefono": "1234567890",
+					"dinero": 100.0
+				},
+				"reintegro": 3
+			}
+		],
+		"Quiniela": [
+			{
+				"id": 53,
+				"fechaApuesta": "2020-01-01",
+				"combinacion": "10 20 30",
+				"precio": 10.0,
+				"ganado": 5.0,
+				"jugador": {
+					"correoElectronico": "jugador1@example.com",
+					"contrasena": "contraseña1",
+					"dni": "1234567890",
+					"telefono": "1234567890",
+					"dinero": 100.0
+				}
+			}
+		],
+		"Gordo": [
+			{
+				"id": 54,
+				"fechaApuesta": "2022-01-01",
+				"combinacion": "123456",
+				"precio": 10.0,
+				"ganado": 0.0,
+				"jugador": {
+					"correoElectronico": "jugador1@example.com",
+					"contrasena": "contraseña1",
+					"dni": "1234567890",
+					"telefono": "1234567890",
+					"dinero": 100.0
+				},
+				"nClave": 7
+			}
+		],
+		"Euromillon": [
+			{
+				"id": 55,
+				"fechaApuesta": "2023-06-01",
+				"combinacion": "10-15-20-25-30",
+				"precio": 2.0,
+				"ganado": 0.0,
+				"jugador": {
+					"correoElectronico": "jugador1@example.com",
+					"contrasena": "contraseña1",
+					"dni": "1234567890",
+					"telefono": "1234567890",
+					"dinero": 100.0
+				},
+				"estrellas": "2-4"
+			}
+		],
+		"Primitva": [
+			{
+				"id": 52,
+				"fechaApuesta": "2020-01-01",
+				"combinacion": "10 20 30",
+				"precio": 10.0,
+				"ganado": 5.0,
+				"jugador": {
+					"correoElectronico": "jugador1@example.com",
+					"contrasena": "contraseña1",
+					"dni": "1234567890",
+					"telefono": "1234567890",
+					"dinero": 100.0
+				},
+				"complementario": 7,
+				"reintegro": 33
+			}
+		]
+	}
+]

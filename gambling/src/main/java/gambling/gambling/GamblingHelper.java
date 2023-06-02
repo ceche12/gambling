@@ -156,7 +156,7 @@ public class GamblingHelper {
 		try {
 			sentencia = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			sentencia.setString(1, mail);
-System.out.println("asdasdasd");
+
 			resultado = sentencia.executeQuery();
 
 			while (resultado.next()) {
@@ -244,7 +244,7 @@ System.out.println("asdasdasd");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			if (resultado != null)
 				resultado.close();
 			if (sentencia != null)
