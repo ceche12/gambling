@@ -60,6 +60,8 @@ public class Jugador {
 	public void setDinero(double dinero) {
 		this.dinero = dinero;
 	}
+	
+	
 
 	@Override
 	public String toString() {

@@ -318,4 +318,169 @@ public class GamblingHelper {
 
 	}
 
+	public void insertarSorteo(Connection connection, Sorteo sorteo) throws SQLException {
+		String sql = "INSERT INTO sorteo (fecha_apertura, fecha_cierre, fecha_hora_celebracion, resultado, tipo) "
+				+ "VALUES (?, ?, ?, ?, ?)";
+
+		try {
+			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, sorteo.getFechaApertura());
+			statement.setString(2, sorteo.getFechaCierre());
+			statement.setString(3, sorteo.getFechaHoraCelebracion());
+			statement.setString(4, sorteo.getResultado());
+			statement.setString(5, sorteo.getTipo());
+
+			if (statement.executeUpdate() > 0) {
+				ResultSet generatedKeys = statement.getGeneratedKeys();
+				if (generatedKeys.next()) {
+					int id = generatedKeys.getInt(1);
+					sorteo.setId(id);
+				}
+			}
+
+			for (Apuesta apuesta : sorteo.getApuestas()) {
+				apuesta.setSorteo(sorteo.getId());
+				insertarApuesta(connection, apuesta);
+			}
+			System.out.println("SORTEO AÑADIDO");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	public void insertarJugador(Connection connection, Jugador jugador) {
+		String sql = "INSERT INTO jugador (correo_electronico, contraseña, dni, telefono, dinero) "
+				+ "VALUES (?, ?, ?, ?, ?)";
+
+		try {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, jugador.getCorreoElectronico());
+			statement.setString(2, jugador.getContrasena());
+			statement.setString(3, jugador.getDni());
+			statement.setString(4, jugador.getTelefono());
+			statement.setDouble(5, jugador.getDinero());
+
+			statement.executeUpdate();
+			System.out.println("JUGADOR AGREGADO");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Apuesta> buscarApuestasPorJugador(Connection connection, String jugadorDni) throws SQLException {
+		String sql = "SELECT * FROM apuesta WHERE correo_jugador = ? ORDER BY fecha_apuesta";
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Apuesta> apuestas = new ArrayList<>();
+
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, jugadorDni);
+			resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				Apuesta apuesta = crearApuestaDesdeResultSet(connection, resultSet);
+				apuestas.add(apuesta);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (resultSet != null) {
+				resultSet.close();
+			}
+			if (statement != null) {
+				statement.close();
+			}
+		}
+
+		return apuestas;
+	}
+
+	private Apuesta crearApuestaDesdeResultSet(Connection connection, ResultSet resultSet) throws SQLException {
+		// Obtener los valores de las columnas del ResultSet
+		int id = resultSet.getInt("id");
+		String fechaApuesta = resultSet.getString("fecha_apuesta");
+		String combinacion = resultSet.getString("combinacion");
+		double precio = resultSet.getDouble("precio");
+		double ganado = resultSet.getDouble("ganado");
+		int sorteo = resultSet.getInt("sorteo");
+		String jugadorDni = resultSet.getString("jugador_dni");
+
+		Jugador jugador = obtenerJugadorPorDni(jugadorDni, connection);
+
+		String tipo = resultSet.getString("tipo");
+		Apuesta apuesta = null;
+
+		switch (tipo) {
+		case "LOTERIA":
+			int reintegro = resultSet.getInt("reintegro");
+			apuesta = new Loteria(id, fechaApuesta, combinacion, precio, ganado, sorteo, jugador, reintegro);
+			break;
+		case "GORDO":
+			int numClave = resultSet.getInt("num_clave");
+			apuesta = new Gordo(id, fechaApuesta, combinacion, precio, ganado, sorteo, jugador, numClave);
+			break;
+		case "PRIMITIVA":
+			int reintegroP = resultSet.getInt("reintegro");
+			int complementario = resultSet.getInt("complementario");
+			apuesta = new Primitiva(id, fechaApuesta, combinacion, precio, ganado, sorteo, jugador, reintegroP,
+					complementario);
+			break;
+		case "EUROMILLON":
+			String estrellas = resultSet.getString("estrellas");
+			apuesta = new Euromillon(id, fechaApuesta, combinacion, precio, ganado, sorteo, jugador, estrellas);
+			break;
+		case "QUINIELA":
+			apuesta = new Quiniela(id, fechaApuesta, combinacion, precio, ganado, sorteo, jugador);
+			break;
+		}
+
+		return apuesta;
+	}
+
+	public Jugador obtenerJugadorPorDni(String jugadorDni, Connection connection) {
+		String sql = "SELECT * FROM jugador WHERE dni = ?";
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Jugador jugador = null;
+
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, jugadorDni);
+			resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				// Obtener los valores de las columnas del ResultSet
+				String correoElectronico = resultSet.getString("correo_electronico");
+				String contrasena = resultSet.getString("contraseña");
+				String telefono = resultSet.getString("telefono");
+				double dinero = resultSet.getDouble("dinero");
+
+				// Crear el objeto Jugador
+				jugador = new Jugador(correoElectronico, contrasena, jugadorDni, telefono, dinero);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return jugador;
+	}
+
 }

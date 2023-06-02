@@ -1,0 +1,17 @@
+{
+  "Apuestas" : [ {
+    "id" : 40,
+    "fechaApuesta" : "2023-06-01",
+    "combinacion" : "10-15-20-25-30",
+    "precio" : 2.0,
+    "ganado" : 0.0,
+    "jugador" : {
+      "correoElectronico" : "jugador1@example.com",
+      "contrasena" : "contraseña1",
+      "dni" : "1234567890",
+      "telefono" : "1234567890",
+      "dinero" : 100.0
+    },
+    "estrellas" : "2-4"
+  } ]
+}
