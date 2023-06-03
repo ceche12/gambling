@@ -12,8 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * 
+ * @author Carlos & Manuel
+ *
+ */
 public class GamblingHelper {
 
+	/**
+	 * establece la conexion con la base de datos
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public Connection crearConexion() throws Exception {
 		Connection conexion = null;
 		try {
@@ -35,6 +46,12 @@ public class GamblingHelper {
 		return conexion;
 	}
 
+	/**
+	 * Cierra la conexion con la base de datos
+	 * 
+	 * @param conex
+	 * @throws SQLException
+	 */
 	public void cerrarConexion(Connection conex) throws SQLException {
 
 		try {
@@ -48,6 +65,14 @@ public class GamblingHelper {
 
 	}
 
+	/**
+	 * 
+	 * consulta para recoger todas las apuestas de la base de datos
+	 * 
+	 * @param conexion
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Apuesta> seleccionarApuestas(Connection conexion) throws Exception {
 		List<Apuesta> apuestas = new ArrayList<>();
 		String sql = "select * from apuesta";
@@ -121,6 +146,15 @@ public class GamblingHelper {
 		return apuestas;
 	}
 
+	/**
+	 * Recoge el jugador de la base datos que contenga el correo electronico pasado
+	 * por parametro
+	 * 
+	 * @param conexion
+	 * @param mail
+	 * @return
+	 * @throws SQLException
+	 */
 	private Jugador jugadorPorMail(Connection conexion, String mail) throws SQLException {
 		Jugador jugador = new Jugador();
 		String sql = "select * from jugador where correo_electronico=?";
@@ -153,6 +187,14 @@ public class GamblingHelper {
 		return jugador;
 	}
 
+	/**
+	 * selecciona todas las apuestas del tipo pasado por parametro
+	 * 
+	 * @param conexion
+	 * @param tipo
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Apuesta> seleccionarApuestas(Connection conexion, String tipo) throws Exception {
 		List<Apuesta> apuestas = new ArrayList<>();
 		String sql = "select * from apuesta where tipo=?";
@@ -229,10 +271,8 @@ public class GamblingHelper {
 
 	/**
 	 * 
-	 * inserta una apuesta en la base de datos, dependiendo de su tipo usara una
-	 * sentencia u otra
+	 * inserta una apuesta de cualquier tipo en la base de datos sentencia u otra
 	 * 
-	 * @author carlos
 	 * @param conex
 	 * @param apuesta
 	 * @throws SQLException
@@ -318,6 +358,14 @@ public class GamblingHelper {
 
 	}
 
+	/**
+	 * Inserta un sorteo en la base de datos, ademas insertará las apuestas que este
+	 * sorteo tenga si es que las tiene
+	 * 
+	 * @param connection
+	 * @param sorteo
+	 * @throws SQLException
+	 */
 	public void insertarSorteo(Connection connection, Sorteo sorteo) throws SQLException {
 		String sql = "INSERT INTO sorteo (fecha_apertura, fecha_cierre, fecha_hora_celebracion, resultado, tipo) "
 				+ "VALUES (?, ?, ?, ?, ?)";
@@ -354,6 +402,13 @@ public class GamblingHelper {
 		}
 	}
 
+	/**
+	 * Inserta un jugador en la base de datos
+	 * 
+	 * @param connection
+	 * @param jugador
+	 * @throws SQLException
+	 */
 	public void insertarJugador(Connection connection, Jugador jugador) throws SQLException {
 		String sql = "INSERT INTO jugador (correo_electronico, contraseña, dni, telefono, dinero) "
 				+ "VALUES (?, ?, ?, ?, ?)";
@@ -376,8 +431,17 @@ public class GamblingHelper {
 		}
 	}
 
+	/**
+	 * Devuelve las apuestas realizadas por el jugador especificado ordenadas por
+	 * fecha de mas reciente a antigua
+	 * 
+	 * @param connection
+	 * @param jugador
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Apuesta> buscarApuestasPorJugador(Connection connection, Jugador jugador) throws SQLException {
-		String sql = "SELECT * FROM apuesta WHERE correo_jugador = ? ORDER BY fecha_apuesta";
+		String sql = "SELECT * FROM apuesta WHERE correo_jugador = ? ORDER BY fecha_apuesta DESC";
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		List<Apuesta> apuestas = new ArrayList<>();
@@ -406,6 +470,14 @@ public class GamblingHelper {
 		return apuestas;
 	}
 
+	/**
+	 * devuelve todas las apuestas que tenga un sorteo
+	 * 
+	 * @param connection
+	 * @param sorteo
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Apuesta> buscarApuestasPorSorteo(Connection connection, Sorteo sorteo) throws SQLException {
 		String sql = "SELECT * FROM apuesta WHERE id_sorteo = ? ORDER BY fecha_apuesta";
 		PreparedStatement statement = null;
@@ -436,6 +508,14 @@ public class GamblingHelper {
 		return apuestas;
 	}
 
+	/**
+	 * metodo privado para crear en java las apuestas recibidas en la base de datos
+	 * 
+	 * @param connection
+	 * @param resultSet
+	 * @return
+	 * @throws SQLException
+	 */
 	private Apuesta crearApuestaDesdeResultSet(Connection connection, ResultSet resultSet) throws SQLException {
 		// Obtener los valores de las columnas del ResultSet
 		int id = resultSet.getInt("id");
@@ -478,6 +558,12 @@ public class GamblingHelper {
 		return apuesta;
 	}
 
+	/**
+	 * devuelve todos los sorteos de la base de datos
+	 * 
+	 * @param conex
+	 * @return
+	 */
 	public List<Sorteo> ObtenerSorteos(Connection conex) {
 		List<Sorteo> sorteos = new ArrayList<>();
 		String sql = "SELECT * FROM sorteo ";
@@ -526,49 +612,13 @@ public class GamblingHelper {
 		return sorteos;
 	}
 
-	public Jugador obtenerJugadorPorDni(String jugadorDni, Connection connection) {
-		String sql = "SELECT * FROM jugador WHERE dni = ?";
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		Jugador jugador = null;
-
-		try {
-			statement = connection.prepareStatement(sql);
-			statement.setString(1, jugadorDni);
-			resultSet = statement.executeQuery();
-
-			if (resultSet.next()) {
-				// Obtener los valores de las columnas del ResultSet
-				String correoElectronico = resultSet.getString("correo_electronico");
-				String contrasena = resultSet.getString("contraseña");
-				String telefono = resultSet.getString("telefono");
-				double dinero = resultSet.getDouble("dinero");
-
-				// Crear el objeto Jugador
-				jugador = new Jugador(correoElectronico, contrasena, jugadorDni, telefono, dinero);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		return jugador;
-	}
-
+	/**
+	 * metodo para sacar un jugador entero a traves de su email
+	 * 
+	 * @param mail
+	 * @param connection
+	 * @return
+	 */
 	public Jugador obtenerJugadorPorMail(String mail, Connection connection) {
 		String sql = "SELECT * FROM jugador WHERE correo_electronico = ?";
 		PreparedStatement statement = null;

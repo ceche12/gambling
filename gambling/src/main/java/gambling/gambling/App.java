@@ -18,9 +18,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 
+ * @author Carlos & Manuel
+ *
+ */
 public class App {
 	/**
-	 * escribir en un json una lista de apuestas
+	 * CONVERTIR UN GRUPO DE APUESTAS A UN JSON
 	 * 
 	 * @param apuestas
 	 */
@@ -96,6 +101,12 @@ public class App {
 		return devuelto;
 	}
 
+	/**
+	 * CONVERTIR A JSON UNA LISTA DE SORTEOS , CADA SORTEO TIENE SU LISTA DE
+	 * APUESTAS Y CADA APUESTA TIENE EL JUGADOR QUE LA HA REALIZADO
+	 * 
+	 * @param sorteos
+	 */
 	public void SorteoToJson(List<Sorteo> sorteos) {
 		File f = new File("sorteos.json");
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -127,7 +138,9 @@ public class App {
 	}
 
 	/**
-	 *
+	 * lee un json que de debe contener una lista de apuestas de cualquier tipo y
+	 * devuelve la lista con esas apuestas
+	 * 
 	 * @param fichero
 	 */
 	public List<Apuesta> jsonApuestaToLista(String fichero) {
@@ -182,6 +195,13 @@ public class App {
 		return apuestas;
 	}
 
+	/**
+	 * lee un json el cual debe contener un array de sorteos , cada sorteo tiene sus
+	 * apuestas y cada apuesta su jugador
+	 * 
+	 * @param fichero
+	 * @return
+	 */
 	public List<Sorteo> sorteosJsonToLista(String fichero) {
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -249,6 +269,13 @@ public class App {
 		return sorteos;
 	}
 
+	/**
+	 * metodo main
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
+
 	public static void main(String[] args) throws Exception {
 
 		App app = new App();
@@ -260,7 +287,7 @@ public class App {
 	/**
 	 * metodo para iniciar la aplicion , la cual Inserta un sorteo con varias
 	 * apuestas y cada apuesta tiene su jugador. una vez inserta estos datos en la
-	 * base de datos los lee y los pasa a un json. Posteriormente usa otro json a
+	 * base de datos los lee y los pasa a un Json. Posteriormente usa otro json a
 	 * traves del cual inserta otro sorteo en la base de datos.
 	 * 
 	 * @throws Exception
