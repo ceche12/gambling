@@ -1,0 +1,26 @@
+[
+	{
+		"fechaApertura": "2010-01-01",
+		"fechaCierre": "2010-01-02",
+		"fechaHoraCelebracion": "2010-01-03 12:14:56",
+		"resultado": null,
+		"tipo": "Loteria",
+		"apuestas": [
+			{
+				"fechaApuesta": "2020-01-01",
+				"combinacion": "10 20 30",
+				"precio": 10.0,
+				"ganado": 5.0,
+				"sorteo": 57,
+				"jugador": {
+					"correoElectronico": "jugador1@example.com",
+					"contrasena": "1234",
+					"dni": "123Y",
+					"telefono": "123999",
+					"dinero": 45.0
+				},
+				"reintegro": 7
+			}
+		]
+	}
+]

@@ -1,5 +1,6 @@
 package gambling.gambling;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sorteo {
@@ -31,6 +32,16 @@ public class Sorteo {
 		this.resultado = resultado;
 		this.tipo = tipo;
 		this.apuestas = apuestas;
+	}
+
+	public Sorteo(String fechaApertura, String fechaCierre, String fechaHoraCelebracion, String resultado,
+			String tipo) {
+		this.fechaApertura = fechaApertura;
+		this.fechaCierre = fechaCierre;
+		this.fechaHoraCelebracion = fechaHoraCelebracion;
+		this.resultado = resultado;
+		this.tipo = tipo;
+		this.apuestas = new ArrayList<>();
 	}
 
 	public Sorteo() {

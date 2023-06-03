@@ -406,6 +406,36 @@ public class GamblingHelper {
 		return apuestas;
 	}
 
+	public List<Apuesta> buscarApuestasPorSorteo(Connection connection, Sorteo sorteo) throws SQLException {
+		String sql = "SELECT * FROM apuesta WHERE id_sorteo = ? ORDER BY fecha_apuesta";
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Apuesta> apuestas = new ArrayList<>();
+
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, sorteo.getId());
+			resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				Apuesta apuesta = crearApuestaDesdeResultSet(connection, resultSet);
+				apuestas.add(apuesta);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (resultSet != null) {
+				resultSet.close();
+			}
+			if (statement != null) {
+				statement.close();
+			}
+		}
+
+		return apuestas;
+	}
+
 	private Apuesta crearApuestaDesdeResultSet(Connection connection, ResultSet resultSet) throws SQLException {
 		// Obtener los valores de las columnas del ResultSet
 		int id = resultSet.getInt("id");
@@ -413,10 +443,10 @@ public class GamblingHelper {
 		String combinacion = resultSet.getString("combinacion");
 		double precio = resultSet.getDouble("precio");
 		double ganado = resultSet.getDouble("ganado");
-		int sorteo = resultSet.getInt("sorteo");
-		String jugadorDni = resultSet.getString("jugador_dni");
+		int sorteo = resultSet.getInt("id_sorteo");
+		String mail = resultSet.getString("correo_jugador");
 
-		Jugador jugador = obtenerJugadorPorDni(jugadorDni, connection);
+		Jugador jugador = obtenerJugadorPorMail(mail, connection);
 
 		String tipo = resultSet.getString("tipo");
 		Apuesta apuesta = null;
@@ -448,6 +478,54 @@ public class GamblingHelper {
 		return apuesta;
 	}
 
+	public List<Sorteo> ObtenerSorteos(Connection conex) {
+		List<Sorteo> sorteos = new ArrayList<>();
+		String sql = "SELECT * FROM sorteo ";
+
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+
+			statement = conex.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				Sorteo sorteo;
+				int id = resultSet.getInt("id");
+				String fechaApertura = resultSet.getString("fecha_apertura");
+				String fechaCierre = resultSet.getString("fecha_cierre");
+				String fechaHoraCelebracion = resultSet.getString("fecha_hora_celebracion");
+				String resultado = resultSet.getString("resultado");
+				String tipo = resultSet.getString("tipo");
+				sorteo = new Sorteo(id, fechaApertura, fechaCierre, fechaHoraCelebracion, resultado, tipo, null);
+				List<Apuesta> apuestas = buscarApuestasPorSorteo(conex, sorteo);
+				sorteo.setApuestas(apuestas);
+				sorteos.add(sorteo);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return sorteos;
+	}
+
 	public Jugador obtenerJugadorPorDni(String jugadorDni, Connection connection) {
 		String sql = "SELECT * FROM jugador WHERE dni = ?";
 		PreparedStatement statement = null;
@@ -465,6 +543,50 @@ public class GamblingHelper {
 				String contrasena = resultSet.getString("contraseña");
 				String telefono = resultSet.getString("telefono");
 				double dinero = resultSet.getDouble("dinero");
+
+				// Crear el objeto Jugador
+				jugador = new Jugador(correoElectronico, contrasena, jugadorDni, telefono, dinero);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return jugador;
+	}
+
+	public Jugador obtenerJugadorPorMail(String mail, Connection connection) {
+		String sql = "SELECT * FROM jugador WHERE correo_electronico = ?";
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Jugador jugador = null;
+
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, mail);
+			resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				// Obtener los valores de las columnas del ResultSet
+				String correoElectronico = resultSet.getString("correo_electronico");
+				String contrasena = resultSet.getString("contraseña");
+				String telefono = resultSet.getString("telefono");
+				double dinero = resultSet.getDouble("dinero");
+				String jugadorDni = resultSet.getString("dni");
 
 				// Crear el objeto Jugador
 				jugador = new Jugador(correoElectronico, contrasena, jugadorDni, telefono, dinero);
