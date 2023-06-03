@@ -6,14 +6,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 
-import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -251,13 +249,6 @@ public class App {
 		return sorteos;
 	}
 
-	public void InsertarLista(Connection conex, List<Apuesta> apuestas) throws SQLException {
-		GamblingHelper gambling = new GamblingHelper();
-		for (Apuesta apuesta : apuestas) {
-			gambling.insertarApuesta(conex, apuesta);
-		}
-	}
-
 	public static void main(String[] args) throws Exception {
 
 		App app = new App();
@@ -289,8 +280,9 @@ public class App {
 		Primitiva prim = new Primitiva("2020-01-01", "10 20 30", 10, 5, 1, jugador, 7, 33);
 		Quiniela quin = new Quiniela("2020-01-01", "10 20 30", 10, 5, 1, jugador2);
 		Gordo gordo = new Gordo("2022-01-01", "123456", 10.0, 0.0, 1, jugador, 7);
-		Euromillon euromillon = new Euromillon("2023-06-01", "10-15-20-25-30", 2.0, 0.0, 1, jugador, "2-4");
+		Euromillon euromillon = new Euromillon("2023-06-01", "10-15-20-25-30", 2.0, 0.0, 1, jugador2, "2-4");
 
+		// esta loteria no se crea por que se añade desde un Json
 		// Loteria loteria = new Loteria("2023-05-15", "5-10-15-20-25", 2.5, 0.0, 1,
 		// jugador, 3);
 
@@ -303,8 +295,8 @@ public class App {
 		sorteo2.getApuestas().add(gordo);
 
 		// añadir jugadores
-		// gambling.insertarJugador(conex, jugador);
-		// gambling.insertarJugador(conex, jugador2);
+		gambling.insertarJugador(conex, jugador);
+		gambling.insertarJugador(conex, jugador2);
 
 		// añadir sorteos y con ellos sus apuestas
 		gambling.insertarSorteo(conex, sorteo);
@@ -318,7 +310,6 @@ public class App {
 
 		// guardar los nuevos sorteos pasados por el json en una lista de sorteos
 		List<Sorteo> sorteosNuevo = app.sorteosJsonToLista("sorteosNuevos.json");
-		System.out.println(sorteosNuevo);
 
 		// insertar sorteos
 		for (Sorteo sorteoN : sorteosNuevo) {

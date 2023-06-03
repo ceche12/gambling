@@ -237,7 +237,7 @@ public class GamblingHelper {
 	 * @param apuesta
 	 * @throws SQLException
 	 */
-	public void insertarApuesta(Connection conex, Apuesta apuesta) throws SQLException {
+	private void insertarApuesta(Connection conex, Apuesta apuesta) throws SQLException {
 
 		String sql = null;
 		PreparedStatement sentencia = null;
